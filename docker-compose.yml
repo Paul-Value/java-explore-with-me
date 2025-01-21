@@ -1,5 +1,5 @@
 services:
-  statistics:
+  stats-server:
     build: statistics/statistics-server
     container_name: stats-service
     ports:
