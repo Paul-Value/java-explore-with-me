@@ -11,8 +11,6 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/stats_postgres_db
       - SPRING_DATASOURCE_USERNAME=dbuser
       - SPRING_DATASOURCE_PASSWORD=12345
-    networks:
-      - stat-net
 
   stats-db:
     image: postgres:16.1
@@ -30,8 +28,6 @@ services:
       timeout: 5s
       interval: 5s
       retries: 10
-    networks:
-      - stat-net
 
   ewm-service:
     build: main-service
