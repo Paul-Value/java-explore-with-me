@@ -51,7 +51,7 @@ services:
       image: postgres:16.1
       container_name: ewm-main-db
       ports:
-        - 5461:5432
+        - "4265:5432"
       environment:
         - POSTGRES_DB=ewm-main
         - POSTGRES_USER=main
@@ -61,13 +61,3 @@ services:
         timeout: 5s
         interval: 5s
         retries: 10
-
-#  main-service:
-#    build: main-service
-#    container_name: main-service
-#    ports:
-#      - "8080:8080"
-volumes:
-  postgres:
-networks:
-  stat-net:
