@@ -11,7 +11,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.practicum.ewm.dto.ApiError;
-import ru.practicum.exception.*;
+import ru.practicum.exception.BadRequestException;
+import ru.practicum.exception.DeletingCategoryWithLinkedEventsException;
+import ru.practicum.exception.NotFoundException;
+import ru.practicum.exception.PublicationEventException;
+import ru.practicum.exception.RequestModificationException;
+import ru.practicum.exception.UniqueEmailByUserException;
+import ru.practicum.exception.UniqueNameCategoriesException;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

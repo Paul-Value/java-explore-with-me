@@ -6,7 +6,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.dto.event.EventFullDto;
 import ru.practicum.dto.event.EventShortDto;
 import ru.practicum.dto.event.PublicParamEvent;
@@ -27,7 +31,7 @@ import java.util.List;
 public class PublicEventsController {
     private final EventService service;
     private final StatClient client;
-    private final String app = "ewm-main-service";
+    private final String app = "main-service";
 
     @GetMapping
     public List<EventShortDto> findAll(@RequestParam(value = "text", required = false) String text,
