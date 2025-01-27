@@ -14,6 +14,7 @@ import ru.practicum.exception.NotFoundException;
 import ru.practicum.exception.RequestModificationException;
 import ru.practicum.mapper.RequestMapper;
 import ru.practicum.model.Event;
+import ru.practicum.model.QRequest;
 import ru.practicum.model.Request;
 import ru.practicum.model.User;
 import ru.practicum.repository.EventRepository;

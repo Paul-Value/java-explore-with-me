@@ -19,6 +19,7 @@ import ru.practicum.mapper.CompilationMapper;
 import ru.practicum.mapper.EventMapper;
 import ru.practicum.model.Compilation;
 import ru.practicum.model.Event;
+import ru.practicum.model.QCompilation;
 import ru.practicum.repository.CompilationRepository;
 import ru.practicum.service.event.EventService;
 

@@ -72,10 +72,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto findById(long catId) {
-        log.debug("==> Find Category with id {}", catId);
-        Category result = repository.findById(catId).orElseThrow(() -> new NotFoundException(String.format("Category with id=%d was not found", catId)));
-        log.debug("<== Found Category with id {}", catId);
+    public CategoryDto findById(long categoryId) {
+        log.debug("==> Find Category with id {}", categoryId);
+        Category result = repository.findById(categoryId).orElseThrow(() -> new NotFoundException(String.format("Category " +
+                "with id=%d was not found", categoryId)));
+        log.debug("<== Found Category with id {}", categoryId);
         return CategoryMapper.modelToDto(result);
     }
 }
