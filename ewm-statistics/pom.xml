@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>statistics</artifactId>
+    <artifactId>ewm-statistics</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>statistics-dto</module>

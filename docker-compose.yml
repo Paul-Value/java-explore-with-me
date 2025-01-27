@@ -1,6 +1,6 @@
 services:
   stats-server:
-    build: statistics/statistics-server
+    build: ewm-statistics/statistics-server
     container_name: stats-service
     ports:
       - "9090:9090"
