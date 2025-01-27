@@ -28,8 +28,8 @@ services:
       retries: 10
 
   ewm-service:
-    build: main-service
-    image: main-service
+    build: ewm-main-service
+    image: ewm-main-service
     container_name: main-service
     ports:
       - "8080:8080"

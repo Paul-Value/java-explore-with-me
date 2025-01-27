@@ -31,7 +31,7 @@ import java.util.List;
 public class PublicEventsController {
     private final EventService service;
     private final StatClient client;
-    private final String app = "main-service";
+    private final String app = "ewm-main-service";
 
     @GetMapping
     public List<EventShortDto> findAll(@RequestParam(value = "text", required = false) String text,
