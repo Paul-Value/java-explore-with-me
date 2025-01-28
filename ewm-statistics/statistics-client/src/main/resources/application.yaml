@@ -1,4 +1,4 @@
 stat:
   client:
     timeout: 5000
-    base-url: "http://localhost:9090"
+    base-url: "http://stats-service:9090"
