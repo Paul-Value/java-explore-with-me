@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.ewm.exception.TimestampRangeException;
 import ru.practicum.ewm.service.ViewStatService;
 import ru.practicum.ewm.dto.EndpointHitRequestDto;
 import ru.practicum.ewm.dto.ViewStatsResponseDto;
@@ -39,6 +40,9 @@ public class StatServerController {
                                                @RequestParam(value = "uris", required = false) List<String> uris,
                                                @RequestParam(value = "unique", defaultValue = "false") boolean unique) {
         log.debug("getStats start: {}, end: {}, uris: {}, unique: {}", start, end, uris, unique);
+        if (start.isAfter(end)) {
+            throw new TimestampRangeException("start is after end");
+        }
         return service.getStats(start, end, uris, unique);
     }
 }
