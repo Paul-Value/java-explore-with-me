@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class PublicCompilationParam {
-    Boolean pinned;
+    private Boolean pinned;
     @Builder.Default
-    Integer from = 0;
+    private Integer from = 0;
     @Builder.Default
-    Integer size = 10;
+    private Integer size = 10;
 }

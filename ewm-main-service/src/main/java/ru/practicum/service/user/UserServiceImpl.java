@@ -2,6 +2,9 @@ package ru.practicum.service.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.dto.user.NewUserRequest;
@@ -24,7 +27,11 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> findAllUsers(List<Long> array, int from, int size) {
         List<User> users;
         if (array == null || array.isEmpty()) {
-            users = repository.findAllLimit(from, size);
+            int page = from / size;
+            Pageable pageable = PageRequest.of(page, size);
+            Page<User> userPage = repository.findAll(pageable);
+            users = userPage.getContent();
+            //users = repository.findAllLimit(from, size);
         } else {
             users = repository.findAllById(array);
         }

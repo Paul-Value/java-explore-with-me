@@ -2,6 +2,8 @@ package ru.practicum.service.category;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.dto.category.CategoryDto;
@@ -64,9 +66,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDto> findAll(int from, int size) {
         log.debug("==> Find all Categories from {}, size {}", from, size);
-        List<Category> result = repository.findAllLimit(from, size);
-        log.debug("<== Found all Categories from {}, size {}", from, size);
-        return result.stream()
+        Pageable page = PageRequest.of(from > 0 ? from / size : 0, size);
+        return repository.findAll(page).stream()
                 .map(CategoryMapper::modelToDto)
                 .toList();
     }
