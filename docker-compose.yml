@@ -1,6 +1,6 @@
 services:
   stats-server:
-    build: statistics/statistics-server
+    build: ewm-statistics/statistics-server
     container_name: stats-service
     ports:
       - "9090:9090"
@@ -11,16 +11,12 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/stats_postgres_db
       - SPRING_DATASOURCE_USERNAME=dbuser
       - SPRING_DATASOURCE_PASSWORD=12345
-    networks:
-      - stat-net
 
   stats-db:
     image: postgres:16.1
-    container_name: stats-db
+    container_name: ewm-stats-db
     ports:
       - "6542:5432"
-    volumes:
-      - postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=stats_postgres_db
       - POSTGRES_USER=dbuser
@@ -30,12 +26,10 @@ services:
       timeout: 5s
       interval: 5s
       retries: 10
-    networks:
-      - stat-net
 
   ewm-service:
-    build: main-service
-    image: main-service
+    build: ewm-main-service
+    image: ewm-main-service
     container_name: main-service
     ports:
       - "8080:8080"
@@ -51,7 +45,7 @@ services:
       image: postgres:16.1
       container_name: ewm-main-db
       ports:
-        - 5461:5432
+        - "4265:5432"
       environment:
         - POSTGRES_DB=ewm-main
         - POSTGRES_USER=main
@@ -61,13 +55,3 @@ services:
         timeout: 5s
         interval: 5s
         retries: 10
-
-#  main-service:
-#    build: main-service
-#    container_name: main-service
-#    ports:
-#      - "8080:8080"
-volumes:
-  postgres:
-networks:
-  stat-net:
