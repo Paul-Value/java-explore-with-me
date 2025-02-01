@@ -20,13 +20,14 @@ public class CommentMapper {
                 .build();
     }
 
-    public static CommentDto modelToDto(Comment model) {
+    public static CommentDto modelToDto(Comment model, int commentsCount) {
         return CommentDto.builder()
                 .id(model.getId())
                 .created(model.getCreated())
+                .updatedAt(model.getUpdatedAt())
                 .text(model.getText())
                 .author(UserMapper.modelToUserShortDto(model.getAuthor()))
-                .event(EventMapper.modelToEventTitleDto(model.getEvent()))
+                .event(EventMapper.modelToEventTitleDto(model.getEvent(), commentsCount))
                 .build();
     }
 }

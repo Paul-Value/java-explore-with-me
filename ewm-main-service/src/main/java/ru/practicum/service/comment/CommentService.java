@@ -16,4 +16,8 @@ public interface CommentService {
     void delete(Long comId);
 
     List<CommentDto> findAllByEventId(Long eventId, Integer from, Integer size);
+
+    CommentDto getCommentByUserAndCommentId(Long userId, Long comId);
+
+    List<CommentDto> findAllByUserIdAndEventId(Long userId, Long eventId, Integer from, Integer size);
 }

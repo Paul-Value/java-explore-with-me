@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS comments
     event_id  BIGINT                              NOT NULL,
     text      VARCHAR(2000)                       NOT NULL,
     created   TIMESTAMP                           NOT NULL,
+    updated_at TIMESTAMP,
     CONSTRAINT pk_comments PRIMARY KEY (id),
     CONSTRAINT fk_author_id_comments FOREIGN KEY (author_id) REFERENCES users (id),
     CONSTRAINT fk_event_id_comments FOREIGN KEY (event_id) REFERENCES events (id),

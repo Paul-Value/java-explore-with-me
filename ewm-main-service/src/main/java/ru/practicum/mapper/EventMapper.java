@@ -101,10 +101,11 @@ public class EventMapper {
                 .build();
     }
 
-    public static EventTitleDto modelToEventTitleDto(Event event) {
+    public static EventTitleDto modelToEventTitleDto(Event event, int commentsCount) {
         return EventTitleDto.builder()
                 .id(event.getId())
                 .title(event.getTitle())
+                .commentsCount(commentsCount)
                 .build();
     }
 }

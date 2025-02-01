@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class EventTitleDto {
     private long id;
     private String title;
+    private int commentsCount;
 }

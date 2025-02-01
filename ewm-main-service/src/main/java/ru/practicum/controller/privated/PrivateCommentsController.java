@@ -7,19 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.comment.CommentDto;
 import ru.practicum.dto.comment.NewCommentDto;
 import ru.practicum.dto.comment.UpdateCommentDto;
 import ru.practicum.service.comment.CommentService;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,11 +36,9 @@ public class PrivateCommentsController {
     }
 
     @PatchMapping("/{comId}")
-    public CommentDto change(@PathVariable @NotNull
-                             @Positive Long userId, @PathVariable @NotNull
-                             @Positive Long comId,
-                             @RequestBody
-                             @Valid UpdateCommentDto requestBody) {
+    public CommentDto change(@PathVariable @NotNull @Positive Long userId,
+                             @PathVariable @NotNull @Positive Long comId,
+                             @RequestBody @Valid UpdateCommentDto requestBody) {
         log.info("==> Change comment: user id {}, comment id {}, request body {}", userId, comId, requestBody);
         return service.change(userId, comId, requestBody);
     }
@@ -58,5 +50,23 @@ public class PrivateCommentsController {
                        @Positive Long comId) {
         log.info("==> Delete comment: user id {}, comment id {}", userId, comId);
         service.delete(userId, comId);
+    }
+
+    @GetMapping("/{comId}")
+    public CommentDto getComment(
+            @PathVariable @NotNull @Positive Long userId,
+            @PathVariable @NotNull @Positive Long comId) {
+        log.info("==> Get comment: user id {}, comment id {}", userId, comId);
+        return service.getCommentByUserAndCommentId(userId, comId);
+    }
+
+    @GetMapping
+    public List<CommentDto> getCommentsByUserAndEvent(
+            @PathVariable @NotNull @Positive Long userId,
+            @RequestParam @NotNull @Positive Long eventId,
+            @RequestParam(defaultValue = "0") Integer from,
+            @RequestParam(defaultValue = "10") Integer size) {
+        log.info("==> Get comments by user id {} and event id {}", userId, eventId);
+        return service.findAllByUserIdAndEventId(userId, eventId, from, size);
     }
 }
