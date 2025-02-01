@@ -60,7 +60,7 @@ public class CommentServiceImpl implements CommentService {
             throw new IllegalArgumentException("The comment ID in the URL and the request body do not match.");
         }
         Comment model = commentRepository.findById(comId).orElseThrow(() -> new NotFoundException("Comment not found"));
-        if (model.getAuthor().getId() != userId) {
+        if (!model.getAuthor().getId().equals(userId)) {
             throw new AccessCommentException("You do not have permission to edit this comment.");
         }
         model.setText(requestBody.getText());
@@ -77,7 +77,7 @@ public class CommentServiceImpl implements CommentService {
     public void delete(Long userId, Long comId) {
         log.debug("==> Delete comment: user: {} comment id: {}", userId, comId);
         Comment model = commentRepository.findById(comId).orElseThrow(() -> new NotFoundException("Comment not found"));
-        if (model.getAuthor().getId() != userId) {
+        if (!model.getAuthor().getId().equals(userId)) {
             throw new AccessCommentException("You do not have permission to edit this comment.");
         }
         commentRepository.deleteById(comId);
