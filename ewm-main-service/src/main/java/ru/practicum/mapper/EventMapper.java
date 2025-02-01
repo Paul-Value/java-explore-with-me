@@ -3,6 +3,7 @@ package ru.practicum.mapper;
 import lombok.experimental.UtilityClass;
 import ru.practicum.dto.event.EventFullDto;
 import ru.practicum.dto.event.EventShortDto;
+import ru.practicum.dto.event.EventTitleDto;
 import ru.practicum.dto.event.NewEventDto;
 import ru.practicum.model.Category;
 import ru.practicum.model.Event;
@@ -97,6 +98,14 @@ public class EventMapper {
                 .title(eventFullDto.getTitle())
                 .views(eventFullDto.getViews())
                 .participantLimit(eventFullDto.getParticipantLimit())
+                .build();
+    }
+
+    public static EventTitleDto modelToEventTitleDto(Event event, int commentsCount) {
+        return EventTitleDto.builder()
+                .id(event.getId())
+                .title(event.getTitle())
+                .commentsCount(commentsCount)
                 .build();
     }
 }
