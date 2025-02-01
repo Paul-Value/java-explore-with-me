@@ -17,6 +17,7 @@ public class CommentMapper {
                 .event(event)
                 .text(requestBody.getText())
                 .created(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 
